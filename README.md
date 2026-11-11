@@ -32,6 +32,10 @@ ai-dlc-orchestrator/
 │   ├── workflow.md
 │   └── integration-checklist.md
 ├── templates/
+│   ├── .github/
+│   │   ├── ISSUE_TEMPLATE/
+│   │   │   └── feature_request.yml
+│   │   └── pull_request_template.md
 │   └── docs/
 │       ├── requirements.md
 │       ├── api-spec.md
@@ -53,6 +57,10 @@ Orchestrator를 운영할 GitHub 저장소의 루트에 다음 파일과 디렉�
 - `docs/`
 - `AGENTS.md`
 - `integration-review-state.json`
+
+필요한 경우 `templates/.github/`의 파일을 대상 저장소 루트의 `.github/`로 복사한다.
+`ISSUE_TEMPLATE/feature_request.yml`: 공통 Parent Issue 작성 양식
+`pull_request_template.md`: 공식 명세·Orchestrator 변경 PR 작성 양식
 
 기존 파일이 있다면 덮어쓰기 전에 변경 사항과 충돌 여부를 확인한다.
 
