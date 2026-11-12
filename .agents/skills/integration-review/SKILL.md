@@ -5,7 +5,7 @@ description: 지정 PR 또는 변경 영향 검토 요청에서 설정된 연결
 
 # 요청 기반 변경 영향 검토
 
-루트의 `AGENTS.md`, `ai-dlc.yaml`, `docs/workflow.md`를 읽고 완료 근거 확인에는 `docs/integration-checklist.md`를 적용한다. 경로 기준은 저장소 루트다. 서비스·저장소·계약·Project·상태 파일 위치는 설정으로 해석한다. 영향 검토 요청은 조회·분석·로컬 상태 갱신·후속 작업 제안까지 수행하며 실제 Issue·Draft·관계·Project·코멘트·서비스 PR은 변경하지 않는다.
+공통 운영 루트의 `AGENTS.md`에 따라 프로젝트를 식별하고 대상 루트의 `ai-dlc.yaml`을 확인한다. 공통 `docs/workflow.md`와 완료 근거인 `docs/integration-checklist.md`를 적용한다. 설정과 상태 파일의 상대 경로는 대상 루트 기준이다. 서비스·저장소·계약·Project·상태 파일 위치는 설정으로 해석한다. 영향 검토 요청은 조회·분석·로컬 상태 갱신·후속 작업 제안까지 수행하며 실제 Issue·Draft·관계·Project·코멘트·서비스 PR은 변경하지 않는다.
 
 ## 대상 탐색과 중복 분석 방지
 
