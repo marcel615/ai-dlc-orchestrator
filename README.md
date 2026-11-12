@@ -43,28 +43,19 @@ ai-dlc-orchestrator/
 │       └── ui-spec.md
 ├── AGENTS.md
 ├── ai-dlc.example.yaml
+├── projects.example.yaml
+├── projects.local.yaml  # 로컬 전용, Git 제외
 ├── integration-review-state.json
 └── README.md
 ```
 
 ## 새 프로젝트에 적용하기
 
-### 1. 공통 파일 복사
+### 1. 프로젝트 등록
 
-Orchestrator를 운영할 GitHub 저장소의 루트에 다음 파일과 디렉터리를 복사한다.
+이 저장소를 공통 운영 루트로 열고 `projects.example.yaml`을 참고해 Git에서 제외되는 `projects.local.yaml`에 각 프로젝트의 이름, 별칭 목록과 절대 경로를 등록한다. 실제 로컬 경로와 비밀값은 공유 예시에 넣지 않는다. 이름과 별칭은 앞뒤 공백과 대소문자를 제외하고 프로젝트 간 중복될 수 없다. 경로는 대상 Git 작업 트리의 루트여야 한다.
 
-- `.agents/`
-- `docs/`
-- `AGENTS.md`
-- `integration-review-state.json`
-
-필요한 경우 `templates/.github/`의 파일을 대상 저장소 루트의 `.github/`로 복사한다.
-`ISSUE_TEMPLATE/feature_request.yml`: 공통 Parent Issue 작성 양식
-`pull_request_template.md`: 공식 명세·Orchestrator 변경 PR 작성 양식
-
-기존 파일이 있다면 덮어쓰기 전에 변경 사항과 충돌 여부를 확인한다.
-
-이 저장소의 `README.md`는 공통 템플릿의 사용 설명서이므로 복사하지 않는다.
+공통 Skill·운영 문서·리뷰 기준·템플릿은 이 저장소에서 읽는다. 대상 저장소의 기존 운영 파일, 설정, 명세와 기록은 자동으로 복사·삭제하거나 덮어쓰지 않는다. Issue·PR 템플릿은 대상 저장소를 우선하고 없으면 공통 `templates/.github/`를 참고한다.
 
 ### 2. 공식 명세 준비
 
@@ -109,15 +100,21 @@ Orchestrator를 Specs 저장소에 설치한다면 `orchestrator.repository`와 
 
 ### 5. AI-DLC 실행
 
-Codex에서 Orchestrator가 설치된 프로젝트를 열고 원하는 작업을 요청한다.
+Codex에서 공통 운영 루트를 열고 등록한 프로젝트 이름과 원하는 작업을 요청한다.
 
 ```text
-아이디어 제안해.
-백로그 정제해.
-변경 영향 검토해.
+Ask-Teacher 프로젝트 아이디어 제안해.
+Ask-Teacher 프로젝트 백로그 정제해.
+Ask-Teacher 프로젝트 변경 영향 검토해.
 ```
 
 각 Skill은 독립적으로 실행하며, 한 작업이 끝났다고 다른 Skill이나 Backend·Frontend 개발 사이클을 자동 시작하지 않는다.
+
+Main은 등록에서 대상을 유일하게 식별하고 대상 설정·Git 루트·실제 원격과 적용되는 로컬 지시를 확인한다. 이름이 없거나 중복되거나 경로·설정·원격이 불명확하면 사용자에게 확인한다. 대상 설정·명세·상태 파일·작업 기록·Git 작업은 대상 루트 기준이다. 제품 구현·테스트는 각 구현 저장소의 AI-DLC가 담당한다. 필요한 작업의 테스트 명령이 설정되지 않았으면 추측하지 않는다.
+
+`Ask-Teacher 프로젝트 작업 시작하자`처럼 작업 종류가 불명확한 요청에서는 대상을 확인한 뒤 원하는 작업을 묻는다. 프로젝트 이름만으로 특정 Skill을 자동 선택하지 않는다.
+
+이는 문서 기반 절차다. 새 Codex 세션에서 공통 Skill이 실제 발견되는지와 대상 선택이 올바르게 작동하는지는 전환 시 별도로 확인해야 한다. 전환 검증 전 기존 프로젝트 운영 파일은 보존한다.
 
 ## 기본 운영 흐름
 
@@ -161,8 +158,6 @@ Codex에서 Orchestrator가 설치된 프로젝트를 열고 원하는 작업을
 
 ## 공통 AI-DLC 업데이트
 
-이 저장소를 수정해도 이미 적용한 프로젝트에 변경 사항이 자동 반영되지는 않는다.
-
-공통 Skill이나 운영 문서가 변경되면 대상 프로젝트와 차이를 비교하고 필요한 파일만 반영한다.
+공통 운영 루트를 사용하는 세션은 이 저장소의 Skill과 운영 문서를 참조한다. 기존 프로젝트의 로컬 지시도 적용 여부와 충돌을 확인하며, 런타임의 자동 발견이나 기존 세션의 갱신은 보장하지 않는다.
 
 프로젝트별 설정인 `ai-dlc.yaml`, 공식 명세 문서 및 실제 분석 상태가 저장된 `integration-review-state.json`은 임의로 덮어쓰지 않는다.

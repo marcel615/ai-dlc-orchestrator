@@ -1,0 +1,5 @@
+projects:
+  - name: Example Project
+    aliases:
+      - Example
+    path: '<absolute-project-directory>'
