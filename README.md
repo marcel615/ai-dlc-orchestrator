@@ -10,6 +10,8 @@
 
 - **기능 아이디어 발굴:** 프로젝트 전체 관점에서 신규 기능을 검토하고 GitHub Projects에 최대 3개의 Pending Draft 등록
 - **통합 백로그 정제:** 승인된 후보를 최대 2개 선정하고 Parent/Sub-issue 생성 및 공식 관계 연결
+- **Issue 상세화:** 정식 Issue의 미결 사항을 사용자와 협의하고 개발 착수 승인과 최신 계약 기준 정리
+- **공통 계약 관리:** 사용자 요청으로 계약 변경을 협의하고 영향 분석과 승인된 명세 PR 진행
 - **변경 영향 분석:** Backend·Frontend·Specs PR과 공식 계약 변경의 프로젝트 간 영향 검토
 - **GitHub Projects 연동:** 기능 후보, 승인 상태, 우선순위 및 통합 진행 상태 관리
 - **공식 명세 참조:** 요구사항·API·인증·ERD·UI 계약의 공식 원본 조회
@@ -25,6 +27,10 @@ ai-dlc-orchestrator/
 │       ├── feature-discovery/
 │       │   └── SKILL.md
 │       ├── cross-project-backlog-refinement/
+│       │   └── SKILL.md
+│       ├── issue-refinement/
+│       │   └── SKILL.md
+│       ├── contract-management/
 │       │   └── SKILL.md
 │       └── integration-review/
 │           └── SKILL.md
@@ -105,6 +111,8 @@ Codex에서 공통 운영 루트를 열고 등록한 프로젝트 이름과 원�
 ```text
 Ask-Teacher 프로젝트 아이디어 제안해.
 Ask-Teacher 프로젝트 백로그 정제해.
+Ask-Teacher 프로젝트의 Parent Issue #123을 상세화해.
+Ask-Teacher 프로젝트의 인증 계약 변경을 관리해.
 Ask-Teacher 프로젝트 변경 영향 검토해.
 ```
 
@@ -121,9 +129,11 @@ Main은 등록에서 대상을 유일하게 식별하고 대상 설정·Git 루�
 1. **기능 발굴:** `feature-discovery`가 프로젝트 전체 요구사항·기존 기능·후보를 검토하고 Pending Draft 등록
 2. **사용자 승인:** 사용자가 GitHub Project에서 기능 후보의 승인 여부 결정
 3. **백로그 정제:** `cross-project-backlog-refinement`가 Approved Draft를 정식 Issue로 전환하고 필요한 구현 Sub-issue 연결
-4. **개별 개발:** Backend·Frontend AI-DLC가 각자의 Issue 기반 개발 절차 수행
-5. **변경 영향 검토:** `integration-review`가 요청 시 PR·계약 변경과 소비자 영향을 분석하고 후속 작업 제안
-6. **통합 완료 확인:** 관련 구현·계약·검증 증거와 Parent 완료 조건 확인
+4. **Issue 상세화:** `issue-refinement`가 사용자와 결정 사항을 협의하고 착수 승인을 확인
+5. **계약 변경:** 필요 시 사용자가 `contract-management`를 직접 요청해 변경 협의·명세 PR을 진행하고 직접 Merge
+6. **개별 개발:** Backend·Frontend AI-DLC가 승인된 Issue 기반 개발 절차 수행
+7. **변경 영향 검토:** `integration-review`가 요청 시 PR·계약 변경과 소비자 영향을 분석하고 후속 작업 제안
+8. **통합 완료 확인:** 관련 구현·계약·검증 증거와 Parent 완료 조건 확인
 
 각 단계는 사용자 요청에 따라 독립적으로 수행된다. 자세한 절차는 `docs/workflow.md`, 통합 완료 기준은 `docs/integration-checklist.md`를 따른다.
 
