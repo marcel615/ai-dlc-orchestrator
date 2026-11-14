@@ -32,3 +32,5 @@ Parent는 `backlog.parent_repository_role`이 지정한 저장소에, Sub-issue�
 후보 승인·중복 재확인→Draft 전환→필요 Issue 생성/재사용→공식 연결→양방향 조회→Project 확인을 수행한다. 부분 성공은 기록하고 기존 Issue·관계를 재사용해 남은 단계만 재개한다.
 
 신규 아이디어 발굴·Draft 등록·승인 변경은 하지 않는다. 선정·보류·중복 근거, 실제 Parent/구현 Issue와 미실행 본문안, 식별자·Link Key, 관계·우선순위·의존성·미결정·통합 검증 기준을 보고하고 종료한다. 다른 Skill이나 개발 사이클을 자동 시작하지 않는다.
+
+정식 Issue의 사용자 협의 기반 상세화와 착수 승인은 별도 요청의 `issue-refinement`가 담당한다. 이 Skill의 초기 정리와 Issue 생성은 상세화 완료나 개발 착수 승인이 아니다.
