@@ -44,8 +44,9 @@ ai-dlc-orchestrator/
 │   │   └── pull_request_template.md
 │   └── docs/
 │       ├── requirements.md
-│       ├── api-spec.md
-│       ├── erd.md
+│       ├── openapi.yaml
+│       ├── auth-policy.md
+│       ├── schema.dbml
 │       └── ui-spec.md
 ├── AGENTS.md
 ├── ai-dlc.example.yaml
@@ -72,9 +73,12 @@ ai-dlc-orchestrator/
 이미 공식 명세가 존재한다면 기존 문서를 유지하고 템플릿으로 덮어쓰지 않는다.
 
 - `requirements.md`: 기능·비기능 요구사항
-- `api-spec.md`: API·인증·오류 처리 계약
-- `erd.md`: 데이터 모델과 관계
+- `openapi.yaml`: API 경로·요청·응답·오류 계약
+- `auth-policy.md`: 인증·세션 및 보안 정책
+- `schema.dbml`: 데이터 모델·관계·제약·인덱스
 - `ui-spec.md`: 화면·라우팅·사용자 동작
+
+이 예시는 API에 OpenAPI, 인증 정책에 Markdown, ERD에 DBML을 사용한다. 데이터베이스 동작이나 설계 이유처럼 DBML에 담기 어려운 내용은 프로젝트가 정한 명세에 기록한다.
 
 초기 템플릿은 작성·검토·승인 전까지 확정된 공식 명세로 간주하지 않는다.
 
@@ -92,6 +96,8 @@ ai-dlc-orchestrator/
 - PR 변경 영향 분석 상태 파일
 
 `[변경 필요]` 항목은 실제 값으로 교체하고, `[확인 필요]` 항목은 실제 프로젝트 환경과 대조한다.
+
+예시의 경로와 형식은 새 프로젝트를 위한 출발점이다. 기존 프로젝트는 명세를 이동하거나 변환하지 않고 각자의 `ai-dlc.yaml`에 지정된 경로·형식·필요한 섹션을 유지한다. Markdown을 포함한 기존 공식 명세도 설정된 저장소와 기본 브랜치에서 읽는다.
 
 Orchestrator를 Specs 저장소에 설치한다면 `orchestrator.repository`와 `repositories.common.repository`에 같은 저장소를 지정할 수 있다.
 
