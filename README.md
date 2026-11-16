@@ -47,8 +47,6 @@ ai-dlc-orchestrator/
 │       ├── openapi.yaml
 │       ├── auth-policy.md
 │       ├── schema.dbml
-│       ├── api-spec.md
-│       ├── erd.md
 │       └── ui-spec.md
 ├── AGENTS.md
 ├── ai-dlc.example.yaml
@@ -80,7 +78,7 @@ ai-dlc-orchestrator/
 - `schema.dbml`: 데이터 모델·관계·제약·인덱스
 - `ui-spec.md`: 화면·라우팅·사용자 동작
 
-이 예시는 API에 OpenAPI, 인증 정책에 Markdown, ERD에 DBML을 사용한다. 데이터베이스 동작이나 설계 이유처럼 DBML에 담기 어려운 내용은 프로젝트가 정한 명세에 기록한다. `api-spec.md`와 `erd.md`는 기존 Markdown 형식의 초기 템플릿으로 계속 제공된다.
+이 예시는 API에 OpenAPI, 인증 정책에 Markdown, ERD에 DBML을 사용한다. 데이터베이스 동작이나 설계 이유처럼 DBML에 담기 어려운 내용은 프로젝트가 정한 명세에 기록한다.
 
 초기 템플릿은 작성·검토·승인 전까지 확정된 공식 명세로 간주하지 않는다.
 
