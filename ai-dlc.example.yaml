@@ -158,23 +158,22 @@ services:
       api:
         # [확인 필요] 공식 API 명세의 위치와 형식
         repository_role: common
-        path: docs/api-spec.md
-        format: markdown
+        path: docs/openapi.yaml
+        format: openapi
         # reference_commit: 실제_확인한_커밋_SHA
 
       authentication:
-        # [확인 필요] 인증 명세의 위치와 섹션
+        # [확인 필요] 인증 정책의 위치와 형식
         repository_role: common
-        path: docs/api-spec.md
-        section: 인증
+        path: docs/auth-policy.md
         format: markdown
         # reference_commit: 실제_확인한_커밋_SHA
 
       erd:
         # [확인 필요] 공식 ERD의 위치와 형식
         repository_role: common
-        path: docs/erd.md
-        format: markdown
+        path: docs/schema.dbml
+        format: dbml
         # reference_commit: 실제_확인한_커밋_SHA
 
       ui:
