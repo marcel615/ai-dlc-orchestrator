@@ -5,6 +5,8 @@ description: 사용자가 직접 요청한 공식 요구사항·API·인증·ERD
 
 # 사용자 주도 공통 계약 관리
 
+`jira` provider는 작업 조회·등록·관련 관계에 `docs/jira-workflow.md`를 적용한다. 아래 명세 저장소 Issue 및 Project 등록·GitHub Sub-issue 관계에 관한 지시는 `github_projects`에만 적용한다. 원본 조회·사용자 승인·명세 PR 절차는 공통이다.
+
 사용자가 자연어 또는 명시적 Skill 호출로 직접 요청한 경우에만 실행한다. 다른 Skill의 제안·연결이나 Issue 존재만으로 자동 실행하지 않는다. 공통 루트 `AGENTS.md`, `docs/workflow.md`, `docs/integration-checklist.md`, 대상 로컬 지시를 따른다. 자연어 변경 요청 또는 지정된 기존 Issue에서 시작하며 선행 Skill 실행은 필요하지 않다. 사용자가 분석만 요청하거나 범위를 제한하면 그 범위를 따른다.
 
 ## 원본·Issue와 영향 확인

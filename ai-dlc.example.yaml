@@ -57,7 +57,11 @@ services:
         # [확인 필요] 실제 연결 검증 후에만 활성화
         # connection_status: verified
 
-    # 공통 백로그 및 Parent/Sub-issue 관리
+    # 생략 시 github_projects. jira를 명시하면 실패 시 다른 도구로 대체하지 않는다.
+    work_tracking:
+      provider: github_projects
+
+    # 공통 백로그 및 GitHub Parent/Sub-issue 관리
     backlog:
       # 기능 후보 발굴 Skill
       draft_skill: feature-discovery
@@ -77,6 +81,34 @@ services:
 
       # GitHub 공식 Sub-issue 관계 사용
       relationship: github-sub-issue
+
+    # Jira 사용 시 provider를 jira로 바꾸고 아래 예시를 실제 값으로 확인한 뒤 주석 해제한다.
+    # project와 jira는 서로 독립된 설정이며 project를 지울 필요는 없다.
+    # jira:
+    #   site_url: https://example.atlassian.net
+    #   project_key: EXAMPLE
+    #   issue_types:
+    #     candidate: Task
+    #     implementation: Task
+    #     epic: Epic
+    #     contract: Task
+    #   statuses:
+    #     candidate: 아이디어 후보
+    #     backlog: 할 일
+    #     ready: 착수 가능
+    #     in_progress: 진행 중
+    #     in_review: 검토 중
+    #     done: 완료
+    #   role_labels:
+    #     backend: area:backend
+    #     frontend: area:frontend
+    #   # Epic이 없는 경우 실제 지원·조회 가능한 Jira 이슈 링크 유형을 확인한다.
+    #   implementation_link_type: REPLACE_WITH_VERIFIED_LINK_TYPE
+    #   implementation_link_direction: outward
+    #   # 사용자 승인 전환의 작성자·시각·상태 이력 확인이 가능해야 한다.
+    #   approval: user_transition_to_backlog
+    #   # 실제 Jira 우선순위 이름을 높은 순서로 모두 기재한다.
+    #   priority_order: [Highest, High, Medium, Low, Lowest]
 
     # GitHub Projects
     project:

@@ -1,9 +1,11 @@
 ---
 name: feature-discovery
-description: 프로젝트 전체 관점에서 기능 아이디어를 발굴하고 기존 기능·Issue·Draft와 중복을 검토해 최대 3개의 Pending Draft를 자동 등록한다. 후보 승인·정제·개발은 수행하지 않는다.
+description: 프로젝트 전체의 기능 아이디어와 기존 작업을 비교해 선택한 작업 추적 도구에 최대 3개 후보를 등록한다. 후보 승인·정제·개발은 수행하지 않는다.
 ---
 
 # 공통 기능 아이디어 발굴
+
+`jira` provider는 공통 원본·중복 검토와 `docs/jira-workflow.md`의 후보 등록 절차를 따른다. 아래 Pending Draft·Project 필드·개발 Status 공란에 관한 지시는 `github_projects`에만 적용한다. Jira 후보는 설정된 후보 상태의 작업이며 승인은 사용자가 한다.
 
 공통 운영 루트의 `AGENTS.md`에 따라 프로젝트를 식별하고 대상 루트의 `ai-dlc.yaml`을 확인한다. 절차는 공통 루트의 `docs/workflow.md`를 따른다. 프로젝트 설정과 기록은 대상 루트 기준이다. 서비스 선택과 Project·필드·계약·저장소는 설정에서 해석하며 특정 서비스 정보를 하드코딩하지 않는다.
 

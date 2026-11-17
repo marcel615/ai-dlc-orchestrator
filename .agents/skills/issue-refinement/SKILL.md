@@ -5,6 +5,8 @@ description: 정식 Parent와 Sub-issue의 최초 상세화 또는 계약 변경
 
 # 사용자 협의 기반 Issue 상세화
 
+`jira` provider는 `docs/jira-workflow.md`의 관계·상세화·계약 작업 절차를 따른다. 아래 GitHub 공식 Sub-issue·Project 등록 및 상태 조정은 `github_projects`에만 적용한다. Jira에서는 결과와 미결 조건을 보고하고 구현 Task의 착수 가능 전환을 사용자에게 남긴다.
+
 공통 루트 `AGENTS.md`, `docs/workflow.md`, `docs/integration-checklist.md`와 대상 로컬 지시를 따른다. 선행 Skill 실행은 필요하지 않다. 사용자가 지정한 정식 Issue의 Parent와 공식 Sub-issue 관계를 양방향 조회하고 관련 작업 범위를 확인한다. Sub-issue가 지정되면 해당 작업과 Parent·영향받는 형제만 다루고, Parent가 지정되면 필요한 자식을 검토한다. 다른 Parent로 재배치하지 않는다. 대상이나 공식 관계를 확인할 수 없으면 해당 범위를 보류한다.
 
 최초 상세화와 사용자가 요청한 선택적 재상세화를 같은 절차로 수행한다. 계약 변경 후라면 변경 Issue·PR의 실제 상태와 Merge된 공식 원본을 확인하고 이전 Issue의 기준 SHA와 차이를 비교한다. 미병합 PR이나 제안은 예정 사항으로 구분하고 최신 공식 계약으로 표시하지 않는다. 관련 없는 Issue를 일괄 수정하거나 구현을 시작하지 않는다.

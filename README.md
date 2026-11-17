@@ -8,12 +8,14 @@
 
 ## 주요 기능
 
-- **기능 아이디어 발굴:** 프로젝트 전체 관점에서 신규 기능을 검토하고 GitHub Projects에 최대 3개의 Pending Draft 등록
-- **통합 백로그 정제:** 승인된 후보를 최대 2개 선정하고 Parent/Sub-issue 생성 및 공식 관계 연결
+- **기능 아이디어 발굴:** 프로젝트 전체 관점에서 신규 기능을 검토하고 선택한 도구에 최대 3개의 후보 등록
+- **통합 백로그 정제:** 승인된 후보를 최대 2개 선정하고 필요한 구현 작업을 생성·연결
 - **Issue 상세화:** 정식 Issue의 미결 사항을 사용자와 협의하고 개발 착수 승인과 최신 계약 기준 정리
 - **공통 계약 관리:** 사용자 요청으로 계약 변경을 협의하고 영향 분석과 승인된 명세 PR 진행
 - **변경 영향 분석:** Backend·Frontend·Specs PR과 공식 계약 변경의 프로젝트 간 영향 검토
-- **GitHub Projects 연동:** 기능 후보, 승인 상태, 우선순위 및 통합 진행 상태 관리
+- **작업 추적:** 기존 GitHub Projects 또는 Jira로 기능 후보, 승인 및 진행 상태 관리
+
+서비스별 `work_tracking.provider`를 생략하면 기존 GitHub Projects를 사용한다. Jira를 선택하면 독립된 `jira` 설정과 [Jira 작업 절차](docs/jira-workflow.md)를 사용하며 연결 실패 시 GitHub로 대체하지 않는다. Jira에서는 사용자가 후보를 승인하고, 정제·상세화 후 실제 착수할 구현 Task를 직접 착수 가능 상태로 옮긴다. 코드·PR·CI는 GitHub, 공식 명세는 설정된 원본 저장소에서 관리한다.
 - **공식 명세 참조:** 요구사항·API·인증·ERD·UI 계약의 공식 원본 조회
 - **통합 완료 판단:** 관련 구현·계약·검증 결과를 종합해 완료 조건 확인
 - **사용자 승인:** 중요한 요구사항·계약 변경 결정과 PR Merge는 사용자가 직접 수행
@@ -90,8 +92,7 @@ ai-dlc-orchestrator/
 
 - 서비스 식별자와 Orchestrator 운영 저장소
 - Specs·Backend·Frontend 저장소 및 기준 브랜치
-- GitHub Projects의 ID·필드·선택지
-- Issue 라벨과 Parent/Sub-issue 관리 역할
+- 선택한 작업 추적 도구의 연결·필드·상태·관계와 구현 역할 표시
 - 공식 요구사항·API·인증·ERD·UI 명세 경로
 - PR 변경 영향 분석 상태 파일
 
@@ -104,8 +105,8 @@ Orchestrator를 Specs 저장소에 설치한다면 `orchestrator.repository`와 
 ### 4. GitHub 환경 확인
 
 - Orchestrator와 연결 저장소의 접근 권한을 확인한다.
-- GitHub Project의 필드·선택지와 Issue 라벨이 실제로 존재하는지 확인한다.
-- Parent/Sub-issue 공식 관계 생성·조회 기능과 권한을 확인한다.
+- GitHub Projects 사용 시 필드·선택지·Issue 라벨과 공식 Parent/Sub-issue 관계 기능·권한을 확인한다.
+- Jira 사용 시 프로젝트·작업 유형·상태·사용자 승인 이력·관계 및 역할 라벨을 확인한다. 자세한 절차는 `docs/jira-workflow.md`를 따른다.
 - 공식 명세의 저장소·브랜치·경로 및 접근 가능 여부를 확인한다.
 - `connection_status`와 `reference_commit`은 실제 확인된 값만 기록한다.
 - `integration-review-state.json`은 새 프로젝트의 빈 초기 상태에서 시작한다.
@@ -132,10 +133,10 @@ Main은 등록에서 대상을 유일하게 식별하고 대상 설정·Git 루�
 
 ## 기본 운영 흐름
 
-1. **기능 발굴:** `feature-discovery`가 프로젝트 전체 요구사항·기존 기능·후보를 검토하고 Pending Draft 등록
-2. **사용자 승인:** 사용자가 GitHub Project에서 기능 후보의 승인 여부 결정
-3. **백로그 정제:** `cross-project-backlog-refinement`가 Approved Draft를 정식 Issue로 전환하고 필요한 구현 Sub-issue 연결
-4. **Issue 상세화:** `issue-refinement`가 사용자와 결정 사항을 협의하고 착수 승인을 확인
+1. **기능 발굴:** `feature-discovery`가 요구사항·기존 기능·후보를 검토하고 선택한 도구에 후보 등록
+2. **사용자 승인:** 사용자가 후보의 승인 여부 결정
+3. **백로그 정제:** `cross-project-backlog-refinement`가 승인 후보의 범위와 필요한 구현 작업을 정리하고 연결
+4. **Issue 상세화:** `issue-refinement`가 사용자와 결정 사항을 협의하고 착수 준비를 정리. Jira에서는 사용자가 구현 Task를 직접 착수 가능으로 전환
 5. **계약 변경:** 필요 시 사용자가 `contract-management`를 직접 요청해 변경 협의·명세 PR을 진행하고 직접 Merge
 6. **개별 개발:** Backend·Frontend AI-DLC가 승인된 Issue 기반 개발 절차 수행
 7. **변경 영향 검토:** `integration-review`가 요청 시 PR·계약 변경과 소비자 영향을 분석하고 후속 작업 제안

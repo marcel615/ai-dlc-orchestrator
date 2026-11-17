@@ -6,7 +6,7 @@
 
 통합 저장소 자체의 문서·브랜치·커밋·Push·PR 유지보수는 사용자에게 요청받은 범위에서 수행한다. 후보 승인·중요한 정책·요구사항·계약·인증·DB 결정은 사용자에게 확인하고 미결정 범위를 임의 확정하지 않는다. `ai-dlc.yaml`의 `orchestrator.default_branch`에 직접 Push하지 않으며 자동 Merge는 하지 않는다. 서비스 제품 구현은 각 AI-DLC에 맡긴다.
 
-schema version 2에서 사용자 지정 서비스 키를 우선하고 없으면 `active_service`를 사용한다. 선택한 `services` 항목의 `repositories`, `backlog`, `project`, `labels`, `requirements`, `contracts`를 해석한다. 지원하지 않는 버전, 없는 서비스·역할, 잘못된 연결은 보류하며 다른 서비스나 통합 저장소로 대체하지 않는다.
+schema version 2에서 사용자 지정 서비스 키를 우선하고 없으면 `active_service`를 사용한다. 선택한 서비스의 `work_tracking.provider`가 없으면 `github_projects`다. `github_projects`는 기존 `project`, `labels`, GitHub Issue·관계 절차를 사용하고, `jira`는 독립된 `jira` 설정과 [Jira 작업 절차](jira-workflow.md)를 사용한다. 지원하지 않는 provider·버전, 필수 설정 누락·오류, 연결이나 권한 실패는 중단하고 보고하며 다른 도구로 대체하지 않는다. `repositories`, `requirements`, `contracts`는 두 경로에서 공통으로 해석한다.
 
 `backlog.parent_repository_role`이 Parent 저장소, `backlog.implementation_repository_roles`가 구현 대상이다. 비활성 역할이 실제로 필요하면 그 부분의 계획·생성을 보류한다. 필요하지 않은 역할에 작업을 만들지 않으며, 비활성 상태 자체를 기능 대상외의 근거로 삼지 않는다.
 
@@ -36,7 +36,9 @@ CLI 인증이 실패하면 곧바로 재인증을 요구하지 않는다. 연결
 
 쓰기 전에는 대상 저장소의 Issues 활성화·Issue와 라벨 변경 권한, 공식 Sub-issue 추가·조회 지원과 소유자 조건, Project 편집 권한·필드·선택지를 각각 확인한다. 저장소 접근 성공이나 Project 조회 성공은 외부 쓰기 성공의 증거가 아니다. 부족한 권한이나 관계 지원을 URL 링크로 우회하지 않는다.
 
-## 공통 Draft 제안·정제
+## GitHub Projects 후보 제안·정제
+
+이 절과 다음 `식별자·공식 관계·부분 실패` 절은 `github_projects` 전용이다. Jira의 후보 선정, 관계 및 재개 절차는 `jira-workflow.md`를 따른다.
 
 제안은 `backlog.draft_skill`의 `feature-discovery`, 승인 후보 정제는 `backlog.refinement_skill`의 `cross-project-backlog-refinement`가 담당한다. `issue-refinement`는 정식 Issue 상세 협의, `contract-management`는 사용자 직접 요청에 따른 계약 변경과 명세 PR, `integration-review`는 PR·계약 변경 영향을 분석한다. 각 Skill은 사용자 지시로 독립 실행하고 필요한 실제 원본을 직접 조회한다. 선행 Skill 실행을 요구하거나 다음 Skill·개발 사이클을 자동 시작하지 않는다. 개별 AI-DLC에는 Draft 작업을 별도 요청하지 않으며 기존 기능을 수정하지 않는다. 개발 중 발견한 필수 기술 후속 작업은 해당 저장소의 기존 절차와 중복 검사로 조정한다.
 
@@ -101,6 +103,8 @@ Draft를 정식 Parent로 전환할 때는 원문을 그대로 앞에 나열하�
 
 ### Issue 상세화와 계약 변경 Issue
 
+이 절의 Issue 저장소·Project 등록·공식 Sub-issue에 관한 절차는 `github_projects` 전용이다. Jira의 상세화·계약 작업 관리는 `jira-workflow.md`를 적용한다. 명세 변경 승인·Specs PR·실제 Merge 구분은 두 provider에 공통이다.
+
 `issue-refinement`는 정식 Parent·Sub-issue와 공식 원본의 차이·미결 사항을 분석하고 선택지·장단점·권장안을 제시해 사용자와 협의한다. 확정된 결정과 공식 원본 URL·SHA를 관련 Issue에 반영한다. 착수는 사용자의 명시적 승인과 필수 조건 확인을 필요로 한다. 재상세화는 사용자 요청에 따라 수행하고 미병합 명세 PR을 공식 원본으로 취급하지 않는다.
 
 두 Skill에서 계약 변경 Issue가 필요하면 영향을 받는 공식 원본의 `repository_role`을 실제 저장소에 대응시킨다. 대상 원본이 하나의 저장소에 모이면 그 명세 저장소를 사용한다. 여러 저장소에 걸치거나 범위·저장소가 불명확하면 단일 Issue 위치를 추정하지 말고 사용자에게 관리 대상과 분할 여부를 확인한다. 선택한 저장소의 템플릿·권한과 설정된 Project를 확인한다.
@@ -158,6 +162,8 @@ Parent는 공식 요구사항·API·인증·ERD·UI의 관련 URL·SHA를 참조
 `integration-review`는 선행 후보·정제 기록 없이도 지정 PR과 계약의 실제 원본으로 실행할 수 있다. 서버 차이·소비자 사용·Issue 필요성을 별도로 판단한다. 새 API 추가와 기존 요청의 인증 조건 변경은 분리한다. 미연결 소비자는 영향 없음이 아니다. 필수 연계 작업은 Issue안, 선택 기능은 별도 기능 검토가 필요한 사항으로 보고하되 Draft 등록·후보 승인·정제를 수행하거나 다른 Skill을 자동 호출하지 않는다. Merge된 PR의 사후 검토는 Merge 전 게이트 실증이 아니며 수동 검토로 Merge 차단을 보장하지 않는다.
 
 ## 상태·완료·재개
+
+아래 Project 상태 전환 절차는 `github_projects` 전용이다. Jira는 `jira-workflow.md`의 사용자 수동 착수 가능 전환을 따른다. 통합 완료 증거와 부분 실패 재확인 원칙은 두 provider에 공통이다.
 
 Draft 개발 상태는 비우고 승인 값은 사용자만 변경한다. 정식 Issue의 상태는 설정된 매핑을 사용한다. 미결정·선행 조건이 남으면 Backlog다. 개발 착수 준비를 표시할 때는 필수 조건과 사용자의 명시적 착수 승인을 확인한 뒤 Ready로 판단한다. Parent를 Ready로 전환할 때 공식 Sub-issue 각각의 범위·완료 조건·계약·승인·실제 선행 조건과 현재 Project 상태를 확인하고, 착수 조건이 충족된 Backlog 자식도 Ready로 전환해 재조회한다. 조건이 미충족이거나 확인되지 않은 자식은 보류 사유를 기록한다. 이미 Ready이거나 진행·검토·완료 중인 자식은 덮어쓰지 않는다. 이 최초 준비 상태 반영 이후 자식의 개발 상태는 담당 AI-DLC가 관리한다. 부모는 조정 시작 후 In Progress, 필요한 구현이 갖춰지고 통합 검증 대기면 In Review, 완료 조건 충족 후 Done이다.
 

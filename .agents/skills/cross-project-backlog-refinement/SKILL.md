@@ -1,9 +1,11 @@
 ---
 name: cross-project-backlog-refinement
-description: 백로그 정제 요청에서 Projects의 Approved Draft를 자동 탐색해 최대 2개 선정하거나 지정 후보를 우선 정제하고, 설정된 Parent와 필요한 구현 Sub-issue를 자동 생성·공식 연결한다. 개발은 자동 시작하지 않는다.
+description: 백로그 정제 요청에서 선택한 작업 추적 도구의 승인 후보를 최대 2개 선정하거나 지정 후보를 우선 정제하고 필요한 구현 작업을 생성·연결한다. 개발은 자동 시작하지 않는다.
 ---
 
 # 승인 후보 선정·정제와 작업 연결
+
+`jira` provider는 공통 목표·원본·중복 검토와 `docs/jira-workflow.md`의 승인 확인·정제·관계 절차를 따른다. 아래 Draft 전환·GitHub 공식 Sub-issue·Project 초기 반영 지시는 `github_projects`에만 적용한다. Jira 구현 Task의 착수 가능 전환은 사용자가 직접 한다.
 
 공통 운영 루트의 `AGENTS.md`에 따라 프로젝트를 식별하고 대상 루트의 `ai-dlc.yaml`을 확인한다. 절차는 공통 루트의 `docs/workflow.md`를 따른다. 프로젝트 설정과 기록은 대상 루트 기준이다. 서비스·저장소 역할·Project·상태·라벨은 설정으로 해석하며 특정 서비스를 하드코딩하지 않는다. 정제 요청은 아래 후보 선정·Parent 전환·필요 Sub-issue 생성·공식 연결·초기 Project 반영을 포함한다. 정상 범위의 작업에 추가 실행 승인을 반복 요청하지 않는다. 사용자가 분석·계획만 요청하거나 범위를 제한하면 그 지시를 따른다.
 
