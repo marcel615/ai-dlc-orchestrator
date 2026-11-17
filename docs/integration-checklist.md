@@ -4,6 +4,10 @@
 
 ## 기능·설정·공식 관계
 
+- provider가 없으면 기존 `github_projects`로 해석했고, Jira를 명시한 경우 설정·접근 실패를 다른 도구로 대체하지 않았다.
+- Jira에서는 후보 승인자의 전환 이력과 출처를 확인하고 구현 Task의 `ready` 전환은 사용자에게 남겼다. 단일 구현 작업은 원래 후보 키의 Task로 유지하고, 여러 작업의 통합 완료 판단에 필요한 경우에만 같은 키로 Epic 전환 후 자식 관계를 양쪽에서 확인했다.
+- 아래 Draft·GitHub 저장소 Issue·공식 Sub-issue·Project 필드 항목은 `github_projects`에 적용한다. Jira에는 `jira-workflow.md`의 해당 검증을 적용한다.
+
 - 공통 운영 루트와 유일하게 식별한 대상 프로젝트 루트·설정·실제 Git 원격을 확인하고 대상 로컬 지시와의 충돌을 확인했다. 상대 상태 파일 경로는 대상 루트를 기준으로 해석했다.
 - 선택 서비스와 설정 버전을 확인하고, Parent가 설정된 공통 관리 저장소에 있다.
 - 공통 후보 제안은 `feature-discovery`의 최대 3개 Pending Draft 범위를 따르고, 정제는 `cross-project-backlog-refinement`에서 실제 Approved 후보만 처리했다. 기존 사용자 후보도 승인·식별자를 확인해 재사용하며 선행 Skill 실행 자체를 완료 요건으로 삼지 않았다.

@@ -5,6 +5,8 @@ description: 지정 PR 또는 변경 영향 검토 요청에서 설정된 연결
 
 # 요청 기반 변경 영향 검토
 
+`jira` provider는 `docs/jira-workflow.md`에 따라 Jira 작업·관계를 조회한다. 아래 GitHub 공식 Sub-issue에 관한 지시는 `github_projects`에만 적용한다. 어느 provider에서도 영향 검토만으로 후속 작업을 생성하지 않는다.
+
 공통 운영 루트의 `AGENTS.md`에 따라 프로젝트를 식별하고 대상 루트의 `ai-dlc.yaml`을 확인한다. 공통 `docs/workflow.md`와 완료 근거인 `docs/integration-checklist.md`를 적용한다. 설정과 상태 파일의 상대 경로는 대상 루트 기준이다. 서비스·저장소·계약·Project·상태 파일 위치는 설정으로 해석한다. 영향 검토 요청은 조회·분석·로컬 상태 갱신·후속 작업 제안까지 수행하며 실제 Issue·Draft·관계·Project·코멘트·서비스 PR은 변경하지 않는다.
 
 ## 대상 탐색과 중복 분석 방지
@@ -29,7 +31,7 @@ UI 명세와 화면·라우팅·사용자 동작·공통 상태 처리의 변경
 
 영향 없음·호환 영향·비호환 영향·보류를 항목별로 분류한다. 서버 차이·소비자 사용·연계 작업 필요성을 구분하고 영향 없는 변경도 근거와 버전을 기록한다. 미연결 소비자를 영향 없음으로 판단하지 않는다.
 
-기존 Issue·후보·공식 관계를 확인해 기존 작업 재사용 또는 필수 연계 작업안을 제시한다. 공통 기능의 작업은 기존 Parent의 공식 Sub-issue로 계획하며 URL은 대체 수단이 아니다. 관계 중복·다른 Parent 충돌·부분 실패는 workflow를 따른다.
+선택 provider의 기존 작업·후보·필요한 관계를 확인해 기존 작업 재사용 또는 필수 연계 작업안을 제시한다. `github_projects`에서는 공통 기능 작업을 기존 Parent의 공식 Sub-issue로 계획하며 URL은 대체 수단이 아니다. `jira`에서는 단일 Task 또는 기존 후보를 전환한 Epic의 자식 구조를 `jira-workflow.md`에 따라 확인한다. 관계 중복·다른 상위 충돌·부분 실패는 선택 provider의 workflow를 따른다.
 
 선택 기능은 별도 검토 사항으로 보고한다. 기능 후보 등록은 `feature-discovery`, Approved 후보 정제·생성·연결은 `cross-project-backlog-refinement`의 책임이다. 다른 Skill이나 개발을 자동 시작하지 않는다.
 
